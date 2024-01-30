@@ -121,4 +121,18 @@ class Viaje
 
         return $this;
     }
+
+    public function calcularAsientos() {
+        $filasAutobus = $this->getAutobus()->getFilas();
+            $columnasAutobus = $this->getAutobus()->getColumnas();
+            $asientos = [];
+            for ($i = 0; $i < $filasAutobus; $i++) {
+                $asientosFilas = [];
+                for ($j = 0; $j < $columnasAutobus; $j++) {
+                    $asientosFilas[] = 1;
+                }
+                $asientos[] = $asientosFilas;
+            }
+            $this->setAsientos($asientos);
+    }
 }
