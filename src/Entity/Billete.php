@@ -20,6 +20,11 @@ class Billete
     #[ORM\ManyToOne(inversedBy: 'billetes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $comprador = null;
+    #[ORM\Column]
+    private ?int $filas = null;
+
+    #[ORM\Column]
+    private ?int $columnas = null;
 
     public function getId(): ?int
     {

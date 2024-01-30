@@ -50,7 +50,7 @@ class ViajeController extends AbstractController
     {
         $viajes  = $viajeRepository->findBy(['itinerario' => $itinerario]);
         return $this->render('viaje/show.html.twig', [
-            
+            'viajes' => $viajes,
         ]);
     }
 

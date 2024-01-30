@@ -3,24 +3,9 @@
 {% block title %}Viaje{% endblock %}
 
 {% block body %}
-    <h1>Viaje</h1>
+   {% for viaje in viajes %}
+        <p>Llegada: {{ viaje.horario.llegada | date('d/m/Y H:i:s')}}</p>
+        <p>Salida: {{ viaje.horario.salida | date('d/m/Y H:i:s')}}</p>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ viaje.id }}</td>
-            </tr>
-            <tr>
-                <th>Asientos</th>
-                
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_viaje_index') }}">back to list</a>
-
-    <a href="{{ path('app_viaje_edit', {'id': viaje.id}) }}">edit</a>
-
-    {{ include('viaje/_delete_form.html.twig') }}
+   {% endfor %}
 {% endblock %}
