@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Autobus index{% endblock %}
+
+{% block body %}
+    <h1>Autobus index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Filas</th>
+                <th>Columnas</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for autobu in autobuses %}
+            <tr>
+                <td>{{ autobu.id }}</td>
+                <td>{{ autobu.filas }}</td>
+                <td>{{ autobu.columnas }}</td>
+                <td>
+                    <a href="{{ path('app_autobus_show', {'id': autobu.id}) }}">show</a>
+                    <a href="{{ path('app_autobus_edit', {'id': autobu.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_autobus_new') }}">Create new</a>
+{% endblock %}

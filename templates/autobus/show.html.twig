@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Autobus{% endblock %}
+
+{% block body %}
+    <h1>Autobus</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ autobu.id }}</td>
+            </tr>
+            <tr>
+                <th>Filas</th>
+                <td>{{ autobu.filas }}</td>
+            </tr>
+            <tr>
+                <th>Columnas</th>
+                <td>{{ autobu.columnas }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_autobus_index') }}">back to list</a>
+
+    <a href="{{ path('app_autobus_edit', {'id': autobu.id}) }}">edit</a>
+
+    {{ include('autobus/_delete_form.html.twig') }}
+{% endblock %}

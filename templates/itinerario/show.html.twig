@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Itinerario{% endblock %}
+
+{% block body %}
+    <h1>Itinerario</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ itinerario.id }}</td>
+            </tr>
+            <tr>
+                <th>Origen</th>
+                <td>{{ itinerario.origen }}</td>
+            </tr>
+            <tr>
+                <th>Destino</th>
+                <td>{{ itinerario.destino }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_itinerario_index') }}">back to list</a>
+
+    <a href="{{ path('app_itinerario_edit', {'id': itinerario.id}) }}">edit</a>
+
+    {{ include('itinerario/_delete_form.html.twig') }}
+{% endblock %}
