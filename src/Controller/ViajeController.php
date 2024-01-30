@@ -30,6 +30,8 @@ class ViajeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $this->calcularAsientos($viaje);
             $entityManager->persist($viaje);
             $entityManager->flush();
 
@@ -77,5 +79,19 @@ class ViajeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_viaje_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function calcularAsientos($viaje) {
+        $filasAutobus = $viaje->getAutobus()->getFilas();
+            $columnasAutobus = $viaje->getAutobus()->getColumnas();
+            $asientos = [];
+            for ($i = 0; $i < $filasAutobus; $i++) {
+                $asientosFilas = [];
+                for ($j = 0; $j < $columnasAutobus; $j++) {
+                    $asientosFilas[] = 1;
+                }
+                $asientos[] = $asientosFilas;
+            }
+            $viaje->setAsientos($asientos);
     }
 }

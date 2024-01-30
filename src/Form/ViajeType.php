@@ -16,7 +16,6 @@ class ViajeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('asientos')
             ->add('autobus', EntityType::class, [
                 'class' => Autobus::class,
 'choice_label' => 'id',
