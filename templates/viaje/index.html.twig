@@ -17,7 +17,6 @@
         {% for viaje in viajes %}
             <tr>
                 <td>{{ viaje.id }}</td>
-                <td>{{ viaje.asientos ? viaje.asientos|join(', ') : '' }}</td>
                 <td>
                     <a href="{{ path('app_viaje_show', {'id': viaje.id}) }}">show</a>
                     <a href="{{ path('app_viaje_edit', {'id': viaje.id}) }}">edit</a>

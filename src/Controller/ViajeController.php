@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Itinerario;
 use App\Entity\Viaje;
 use App\Form\ViajeType;
 use App\Repository\ViajeRepository;
@@ -45,10 +46,11 @@ class ViajeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_viaje_show', methods: ['GET'])]
-    public function show(Viaje $viaje): Response
+    public function show(Itinerario $itinerario, ViajeRepository $viajeRepository): Response
     {
+        $viajes  = $viajeRepository->findBy(['itinerario' => $itinerario]);
         return $this->render('viaje/show.html.twig', [
-            'viaje' => $viaje,
+            
         ]);
     }
 
