@@ -23,6 +23,14 @@ class ViajeController extends AbstractController
         ]);
     }
 
+    #[Route('/billetes/{id}', name: 'app_viaje_billete', methods: ['GET'])]
+    public function billete(Viaje $viaje,ViajeRepository $viajeRepository): Response
+    {
+        return $this->render('viaje/billete.html.twig', [
+            'asientos' => $viaje->getAsientos(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_viaje_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Viaje{% endblock %}
+
+{% block body %}
+
+{% set currentFila = 0 %}
+{% for fila in asientos %}
+    {% set currentColumna = 0 %}
+    {% set currentFila = currentFila + 1 %}
+    {% for columna in fila %}
+        {% set currentColumna = currentColumna + 1 %}
+        {% if columna == 1 %}
+            <p>Fila:{{currentFila}}-Columna:{{ currentColumna }}</p>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}
