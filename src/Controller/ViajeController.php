@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Itinerario;
+use App\Entity\Billete;
 use App\Entity\Viaje;
 use App\Form\ViajeType;
 use App\Repository\ViajeRepository;
@@ -31,19 +32,41 @@ class ViajeController extends AbstractController
         $asientos = $request->get('asientos');
         $coordenadas = [];
         foreach ($asientos as $asiento){
-            $coordenadas[] = [floor($asiento/$columnas), $asiento%$columnas];
+            $coordenadas[] = [ceil($asiento/$columnas), ($asiento%$columnas == 0) ? ($asiento/ceil($asiento/$columnas)) : ($asiento%$columnas)];
         }
         return $this->render('viaje/confirmar.html.twig', [
             'coordenadas' => $coordenadas,
+            'viaje' => $viaje
         ]);
     }
 
     #[Route('/confirmar/{id}', name: 'polal', methods: ['POST'])]
-    public function confirmacion(ViajeRepository $viajeRepository,Request $request): Response
+    public function confirmacion(Viaje $viaje, ViajeRepository $viajeRepository,Request $request
+    ,EntityManagerInterface $entityManager): Response
     {
         $coordenadas = json_decode($request->get('coordenadas'));
-        
+        $succed = $viaje->checkAsientosDisponibles($coordenadas);
+
+        if($succed) {
+            foreach($coordenadas as $coordenada) {
+                $billete = new Billete();
+                $billete->setComprador($this->getUser());
+                $billete->setViaje($viaje);
+                $billete->setFila($coordenada[0]);
+                $billete->setColumna($coordenada[1]);
+                $entityManager->persist($billete);
+            }
+            $viaje->quitarAsientos($coordenadas);
+            $entityManager->flush();
+
+            return $this->render('main/index.html.twig', [
+                'venta' => true
+            ]);    
+        }
+
         return $this->render('viaje/billete.html.twig', [
+            'asientos' => $viaje->getAsientos(),
+            'viaje' => $viaje,
         ]);
     }
 

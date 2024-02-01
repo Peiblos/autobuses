@@ -21,10 +21,10 @@ class Billete
     #[ORM\JoinColumn(nullable: false)]
     private ?User $comprador = null;
     #[ORM\Column]
-    private ?int $filas = null;
+    private ?int $fila = null;
 
     #[ORM\Column]
-    private ?int $columnas = null;
+    private ?int $columna = null;
 
     public function getId(): ?int
     {
@@ -51,6 +51,30 @@ class Billete
     public function setComprador(?User $comprador): static
     {
         $this->comprador = $comprador;
+
+        return $this;
+    }
+
+    public function getFila(): ?int
+    {
+        return $this->fila;
+    }
+
+    public function setFila($fila): static
+    {
+        $this->fila = $fila;
+
+        return $this;
+    }
+
+    public function getColumna(): ?User
+    {
+        return $this->columna;
+    }
+
+    public function setColumna($columna): static
+    {
+        $this->columna = $columna;
 
         return $this;
     }
