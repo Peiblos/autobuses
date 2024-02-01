@@ -148,4 +148,23 @@ class Viaje
         }
         return $contador;    
     }
+
+    public function checkAsientosDisponibles($coordenadas): bool
+    {
+        $asientos = $this->getAsientos();
+        foreach($coordenadas as $coordenada) {
+            if($asientos[$coordenada[0] -1][$coordenada[1] - 1] == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public function quitarAsientos($coordenadas): void
+    {
+        $asientos = $this->getAsientos();
+        foreach($coordenadas as $coordenada) {
+            $asientos[$coordenada[0] -1][$coordenada[1] - 1] = 0;
+        }   
+    }
 }

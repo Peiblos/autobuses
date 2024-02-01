@@ -13,7 +13,7 @@ class MainController extends AbstractController
     public function index(ViajeRepository $viajeRepository): Response
     {
         return $this->render('main/index.html.twig', [
-            
+            'venta' => null
         ]);
     }
 }
