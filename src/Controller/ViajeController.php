@@ -23,6 +23,15 @@ class ViajeController extends AbstractController
         ]);
     }
 
+    #[Route('/check', name: 'app_viaje_check', methods: ['POST'])]
+    public function check(ViajeRepository $viajeRepository,Request $request): Response
+    {
+        $elementosSerializados = $request->get('asientos');
+        dd($elementosSerializados);
+        return $this->render('viaje/billete.html.twig', [
+        ]);
+    }
+
     #[Route('/billetes/{id}', name: 'app_viaje_billete', methods: ['GET'])]
     public function billete(Viaje $viaje,ViajeRepository $viajeRepository): Response
     {

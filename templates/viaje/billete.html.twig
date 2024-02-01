@@ -4,16 +4,27 @@
 
 {% block body %}
 
+
+
 {% set currentFila = 0 %}
-{% for fila in asientos %}
-    {% set currentColumna = 0 %}
-    {% set currentFila = currentFila + 1 %}
-    {% for columna in fila %}
-        {% set currentColumna = currentColumna + 1 %}
-        {% if columna == 1 %}
-            <p>Fila:{{currentFila}}-Columna:{{ currentColumna }}</p>
-        {% endif %}
+{% set idAsiento = 0 %}
+
+<form method="post" action="/viaje/check">
+    {% for fila in asientos %}
+        {% set currentColumna = 0 %}
+        {% set currentFila = currentFila + 1 %}
+        {% for columna in fila %}
+            {% set currentColumna = currentColumna + 1 %}
+            {% set idAsiento = idAsiento + 1 %}
+            {% if columna == 1 %}
+                <p>Fila:{{currentFila}}-Columna:{{ currentColumna }}</p>
+                    <label for="checkbox">Seleccionar</label>
+                    <input type="checkbox" id="checkbox" name="asientos[]" value={{idAsiento}}>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
-{% endfor %}
+    <br>
+    <input type="submit" value="Comprar billetes seleccionados">
+</form>
 
 {% endblock %}
