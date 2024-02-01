@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmar compras{% endblock %}
+
+{% block body %}
+
+    {% for coordenada in coordenadas %}
+        <p>Fila: {{coordenada[0] + 1}} Columna: {{coordenada[1]}}</p>
+
+    {% endfor %}
+    <form method="post" action="/viaje/confirmar">
+        <input type="hidden" value="{{coordenadas | json_encode}}" name="coordenadas"/>
+        <input type="submit" value="Confirmar"/>
+    </form>
+
+
+{% endblock %}

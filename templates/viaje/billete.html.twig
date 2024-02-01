@@ -9,7 +9,7 @@
 {% set currentFila = 0 %}
 {% set idAsiento = 0 %}
 
-<form method="post" action="/viaje/check">
+<form method="post" action="/viaje/check/{{viaje.id}}">
     {% for fila in asientos %}
         {% set currentColumna = 0 %}
         {% set currentFila = currentFila + 1 %}

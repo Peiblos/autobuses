@@ -23,11 +23,26 @@ class ViajeController extends AbstractController
         ]);
     }
 
-    #[Route('/check', name: 'app_viaje_check', methods: ['POST'])]
-    public function check(ViajeRepository $viajeRepository,Request $request): Response
+    #[Route('/check/{id}', name: 'app_viaje_check', methods: ['POST'])]
+    public function check(Viaje $viaje, ViajeRepository $viajeRepository,Request $request): Response
     {
-        $elementosSerializados = $request->get('asientos');
-        dd($elementosSerializados);
+        $filas = $viaje->getAutobus()->getFilas();
+        $columnas = $viaje->getAutobus()->getColumnas();
+        $asientos = $request->get('asientos');
+        $coordenadas = [];
+        foreach ($asientos as $asiento){
+            $coordenadas[] = [floor($asiento/$columnas), $asiento%$columnas];
+        }
+        return $this->render('viaje/confirmar.html.twig', [
+            'coordenadas' => $coordenadas,
+        ]);
+    }
+
+    #[Route('/confirmar/{id}', name: 'polal', methods: ['POST'])]
+    public function confirmacion(ViajeRepository $viajeRepository,Request $request): Response
+    {
+        $coordenadas = json_decode($request->get('coordenadas'));
+        
         return $this->render('viaje/billete.html.twig', [
         ]);
     }
@@ -37,6 +52,7 @@ class ViajeController extends AbstractController
     {
         return $this->render('viaje/billete.html.twig', [
             'asientos' => $viaje->getAsientos(),
+            'viaje' => $viaje,
         ]);
     }
 
