@@ -4,8 +4,30 @@
 
 {% block body %}
    {% for viaje in viajes %}
-        <p>Llegada: {{ viaje.horario.llegada | date('d/m/Y H:i:s')}}</p>
-        <p>Salida: {{ viaje.horario.salida | date('d/m/Y H:i:s')}}</p>
+       
+
+
+   <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ viaje.id }}</td>
+            </tr>
+            <tr>
+                <th>Llegada</th>
+                <td>{{ viaje.horario.llegada | date('d/m/Y H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Salida</th>
+                <td>{{ viaje.horario.salida | date('d/m/Y H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Asientos Libres</th>
+                <td>{{ viaje.AsientosTotales }}</td>
+            </tr>
+        </tbody>
+    </table>
+
 
    {% endfor %}
 {% endblock %}

@@ -135,4 +135,17 @@ class Viaje
             }
             $this->setAsientos($asientos);
     }
+
+    public function AsientosTotales() {
+        $asientos = $this->getAsientos();
+        $contador = 0;  
+        foreach ($asientos as $fila) {
+            foreach ($fila as $asiento) {
+                if ($asiento == 1) {
+                    $contador++;
+                }
+            }
+        }
+        return $contador;    
+    }
 }
