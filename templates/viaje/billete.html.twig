@@ -9,22 +9,36 @@
 {% set currentFila = 0 %}
 {% set idAsiento = 0 %}
 
-<form method="post" action="/viaje/check/{{viaje.id}}">
-    {% for fila in asientos %}
-        {% set currentColumna = 0 %}
-        {% set currentFila = currentFila + 1 %}
-        {% for columna in fila %}
-            {% set currentColumna = currentColumna + 1 %}
-            {% set idAsiento = idAsiento + 1 %}
-            {% if columna == 1 %}
-                <p>Fila:{{currentFila}}-Columna:{{ currentColumna }}</p>
-                    <label for="checkbox">Seleccionar</label>
-                    <input type="checkbox" id="checkbox" name="asientos[]" value={{idAsiento}}>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
+
+
+<h1>Viaje {{ viaje.id }}</h1>
+<form method="post" action="/viaje/check/{{ viaje.id }}">
+    <table border="1">
+        <tbody>
+            {% for fila in asientos %}
+                {% set currentColumna = 0 %}
+                {% set currentFila = currentFila + 1 %}
+                <tr>
+                    {% for columna in fila %}
+                        {% set currentColumna = currentColumna + 1 %}
+                        {% set idAsiento = idAsiento + 1 %}
+                        {% if columna == 1 %}
+                            <td>
+                                <h5>Asiento: </h5> {{ currentFila}} -- {{ currentColumna}} <br/>
+                                <label for="checkbox_{{ idAsiento }}">Seleccionar</label>
+                                <input type="checkbox" name="asientos[]" value="{{ idAsiento }}">
+                            </td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <br>
     <input type="submit" value="Comprar billetes seleccionados">
 </form>
+
 
 {% endblock %}
