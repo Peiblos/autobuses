@@ -3,35 +3,23 @@
 {% block title %}Itinerario index{% endblock %}
 
 {% block body %}
-    <h1>Itinerario index</h1>
+    <h1>Itinerarios</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Origen</th>
                 <th>Destino</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for itinerario in itinerarios %}
             <tr>
-                <td>{{ itinerario.id }}</td>
                 <td>{{ itinerario.origen }}</td>
                 <td>{{ itinerario.destino }}</td>
-                <td>
-                    <a href="{{ path('app_viaje_show', {'id': itinerario.id}) }}">show</a>
-                    <a href="{{ path('app_itinerario_edit', {'id': itinerario.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
+                <td><a href="/viaje/billetes/{{ itinerario.id }}">Ver billetes</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_itinerario_new') }}">Create new</a>
 {% endblock %}

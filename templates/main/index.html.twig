@@ -22,4 +22,13 @@
     
 {% endif %}
 
+{% if is_granted("ROLE_ADMIN") %}
+<hr/>
+<h1>PANEL DE ADMINISTRACIÓN</h1>
+    <a href="{{ path('app_itinerario_new') }}">Crear Nuevo itinerario</a><br>
+    <a href="{{ path('app_autobus_new') }}">Crear Nuevo Bus</a><br>
+    <a href="{{ path('app_horario_new') }}">Crear Nuevo Horario</a><br>
+    <a href="{{ path('app_viaje_new') }}">Crear Nuevo Viaje</a>
+{% endif %}
+
 {% endblock %}
