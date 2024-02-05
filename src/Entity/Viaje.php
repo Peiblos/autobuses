@@ -165,6 +165,7 @@ class Viaje
         $asientos = $this->getAsientos();
         foreach($coordenadas as $coordenada) {
             $asientos[$coordenada[0] -1][$coordenada[1] - 1] = 0;
-        }   
+        }  
+        $this->setAsientos($asientos);
     }
 }
